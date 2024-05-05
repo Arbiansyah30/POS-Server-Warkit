@@ -27,9 +27,11 @@ export const Login = async (req: Request, res: Response): Promise<Response> => {
         });
         res.cookie("access_token", access_token, {
           maxAge: 3600000,
-          httpOnly: false,
+          httpOnly: true,
           secure: false,
         });
+        res.set("Access-Control-Allow-Credentials", "true");
+        res.set("Access-Control-Allow-Origin", "http://localhost:3000");
         return res.status(200).json({ message: "User found", access_token, refresh_token });
       }
     }
